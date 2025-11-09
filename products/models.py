@@ -7,7 +7,7 @@ class Product(models.Model) :
     price = models.DecimalField(max_digits=6,decimal_places=2)
     description = models.CharField(max_length=500)
     image = models.ImageField(upload_to="products_images/")
-    embedding = VectorField() 
+    embedding = VectorField(null=True , blank=True) 
 
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
 
