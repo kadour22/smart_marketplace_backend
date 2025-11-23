@@ -21,3 +21,8 @@ def create_product_service(product_data):
     serializer.is_valid(raise_exception=True)
     serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+# delete product service
+def delete_product_service(product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
