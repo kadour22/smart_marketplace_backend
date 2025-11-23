@@ -1,6 +1,11 @@
 from .models import Product
 from .serializers import product_serializer
-
+from .services.products_services import (
+    product_detail_service,
+    list_products_service,
+    create_product_service,
+    delete_product_service
+)
 from rest_framework import viewsets
 from sentence_transformers import SentenceTransformer, util
 import torch
@@ -9,7 +14,20 @@ from rest_framework.response import Response
 from sklearn.metrics.pairwise import cosine_similarity
 
 import numpy as np
+
 model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
+
+
+class product_services_view(APIView) :
+    def post(self, request) :
+        return create_product_service(request.data)
+    def get(self, request, product_id) :
+        return product_detail_service(product_id)
+    def delete(self, request, product_id) :
+        return delete_product_service(product_id)
+    
+    def list(self, request) :
+        return list_products_service()
 
 class semantic_search(APIView) :
     def get(self, request):
