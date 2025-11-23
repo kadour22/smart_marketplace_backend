@@ -6,3 +6,4 @@ class product_serializer(serializers.ModelSerializer) :
         model = Product
         fields = "__all__"
         read_only_fields = ['embedding', 'seller']
+        
