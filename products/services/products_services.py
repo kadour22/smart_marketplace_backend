@@ -15,3 +15,9 @@ def product_detail_service(product_id):
     product = get_object_or_404(Product, id=product_id)
     serializer = product_serializer(product)
     return Response(serializer.data, status=status.HTTP_200_OK)
+# def create product service
+def create_product_service(product_data):
+    serializer = product_serializer(data=product_data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
