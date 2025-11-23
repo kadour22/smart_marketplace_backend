@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('' , views.semantic_search.as_view()),
-    # path('search/' , views.product_viewset.as_view({'get':'list'}))
+    path('<int:product_id>/' , views.product_services_view.as_view()),
 ]
