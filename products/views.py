@@ -37,6 +37,7 @@ class semantic_search(APIView) :
         
         query_embedding = model.encode([query])
         
+        
         products = Product.objects.all()
         embedding = [p.embedding for p in products]
         similarities = cosine_similarity(query_embedding , embedding)[0]
