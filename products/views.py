@@ -1,5 +1,5 @@
 from .models import Product
-from .serializers import product_serializer
+from .serializers import product_serializer , product_list_serializer
 from .services.products_services import (
     product_detail_service,
     list_products_service,
@@ -12,6 +12,8 @@ import torch
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from sklearn.metrics.pairwise import cosine_similarity
+from .ai_assistant.call_ai import parse_user_query
+from .filters import filter_products
 
 import numpy as np
 
@@ -21,13 +23,11 @@ model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 class product_services_view(APIView) :
     def post(self, request) :
         return create_product_service(request.data)
-    def get(self, request, product_id) :
-        return product_detail_service(product_id)
+    def get(self, request) :
+        return list_products_service()
     def delete(self, request, product_id) :
         return delete_product_service(product_id)
     
-    def list(self, request) :
-        return list_products_service()
 
 class semantic_search(APIView) :
     def get(self, request):
@@ -55,3 +55,23 @@ class semantic_search(APIView) :
         results = sorted(results, key=lambda x: x["similarity"], reverse=True)
         results = results[:10] 
         return Response({"results": results})
+
+class AIShoppingAssistant(APIView):
+    def post(self, request):
+        user_text = request.data.get("query")
+
+        if not user_text:
+            return Response({"error": "Query is required"}, status=400)
+
+        # Step 1: Convert user text → AI structured filters
+        ai_filters = parse_user_query(user_text)
+
+        # Step 2: Convert filters → QuerySet
+        products = filter_products(ai_filters)
+        print(products)
+        # Step 3: Serialize and return response
+        serializer = product_list_serializer(products, many=True)
+        return Response({
+            "filters": ai_filters,
+            "results": serializer.data
+        })
