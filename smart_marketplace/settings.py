@@ -30,8 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
-    'rest_framework',
-    'pgvector'
+    'customers',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -76,8 +76,6 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT"),
     }
 }
-
-# Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -118,3 +116,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
