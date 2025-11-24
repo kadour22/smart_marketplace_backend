@@ -36,13 +36,12 @@ def parse_user_query(user_text: str):
 
     raw_text = response.choices[0].message.content
 
-    # Attempt to extract JSON object from any extra text
+    # Extract JSON from the response
     try:
-        # Match JSON between first { and last }
         json_str = re.search(r"\{.*\}", raw_text, re.DOTALL).group()
         data = json.loads(json_str)
+    # Handle cases where extraction or parsing fails
     except (AttributeError, json.JSONDecodeError):
-        # Fallback if extraction fails
         data = {
             "category": None,
             "min_price": None,

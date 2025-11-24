@@ -63,13 +63,12 @@ class AIShoppingAssistant(APIView):
         if not user_text:
             return Response({"error": "Query is required"}, status=400)
 
-        # Step 1: Convert user text → AI structured filters
         ai_filters = parse_user_query(user_text)
-
-        # Step 2: Convert filters → QuerySet
+        print("filters:", ai_filters)
+        
         products = filter_products(ai_filters)
         print(products)
-        # Step 3: Serialize and return response
+        
         serializer = product_list_serializer(products, many=True)
         return Response({
             "filters": ai_filters,
