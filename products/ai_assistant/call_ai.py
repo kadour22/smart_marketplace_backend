@@ -1,12 +1,7 @@
 import os
 import json
 import re
-from openai import OpenAI
-api_key = os.getenv("OPENROUTER_API_KEY")
-client = OpenAI(
-  base_url="https://openrouter.ai/api/v1",
-  api_key=api_key,  
-)
+from .AiInstnace import client
 
 def parse_user_query(user_text: str):
     prompt = f"""
