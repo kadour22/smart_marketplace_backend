@@ -7,7 +7,7 @@ class Product(models.Model) :
     category = models.CharField(max_length=100 , null=True, blank=True)
     color = models.CharField(max_length=50, null=True, blank=True)
     price = models.DecimalField(max_digits=6,decimal_places=2)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=500,null=True, blank=True)
     image = models.ImageField(upload_to="products_images/")
     embedding = ArrayField(base_field=models.FloatField(), size=1536, null=True, blank=True)
 

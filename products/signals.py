@@ -11,7 +11,6 @@ def embedding_product_field(sender , instance , **kwargs) :
     instance.embedding = model.encode(text).tolist()
     print(f'{instance.embedding[:5]}')
 
-
 @receiver(pre_save, sender=Product)        
 def generate_discription_with_ai(sender, instance, **kwargs):
         if not instance.description:
