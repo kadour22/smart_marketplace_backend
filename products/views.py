@@ -23,15 +23,14 @@ model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 class product_services_view(APIView) :
     def post(self, request) :
         return create_product_service(request.data)
-    def get(self, request, product_id=None) :
-        if product_id :
-            return product_detail_service(product_id)
-        else :
-            return list_products_service()
-        
+    def get(self, request) :
+        return list_products_service
     def delete(self, request, product_id) :
         return delete_product_service(product_id)
     
+class product_detail_view(APIView) :
+    def get(self, request, product_id) :
+        return product_detail_service(product_id)
 
 class semantic_search(APIView) :
     def get(self, request):
