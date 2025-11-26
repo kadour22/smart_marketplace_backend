@@ -4,7 +4,8 @@ from .services.products_services import (
     product_detail_service,
     list_products_service,
     create_product_service,
-    delete_product_service
+    delete_product_service,
+    add_to_wishlist_service,
 )
 from rest_framework import viewsets
 from sentence_transformers import SentenceTransformer, util
@@ -78,3 +79,8 @@ class AIShoppingAssistant(APIView):
             "filters": ai_filters,
             "results": serializer.data
         })
+
+class AddToWishlistView(APIView):
+    def post(self, request, product_id):
+        user = request.user
+        return add_to_wishlist_service(user, product_id)
