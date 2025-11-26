@@ -6,16 +6,10 @@ from decimal import Decimal
 def filter_products(filters: dict):
     queryset = Product.objects.all()
 
-    # --------------------------
-    # Category filtering
-    # --------------------------
     category = filters.get("category")
     if category:
         queryset = queryset.filter(category__icontains=category)
 
-    # --------------------------
-    # Color filtering
-    # --------------------------
     color = filters.get("color")
     if color:
         queryset = queryset.filter(color__icontains=color)

@@ -1,6 +1,7 @@
 # rest_framework imports
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 # local imports
 from .models import Product
 from .serializers import product_serializer , product_list_serializer
@@ -22,6 +23,7 @@ model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 
 
 class product_services_view(APIView) :
+    permission_classes = [IsAuthenticated]
     def post(self, request) :
         return create_product_service(request.data)
     def get(self, request) :
@@ -30,10 +32,12 @@ class product_services_view(APIView) :
         return delete_product_service(product_id)
     
 class product_detail_view(APIView) :
+    permission_classes = [IsAuthenticated]
     def get(self, request, product_id) :
         return product_detail_service(product_id)
 
 class semantic_search(APIView) :
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         query = request.query_params.get("q")
         if not query:
@@ -62,6 +66,7 @@ class semantic_search(APIView) :
         return Response({"results": results})
 
 class AIShoppingAssistant(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         user_text = request.data.get("query")
 
@@ -81,6 +86,7 @@ class AIShoppingAssistant(APIView):
         })
 
 class AddToWishlistView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request, product_id):
         user = request.user
         return add_to_wishlist_service(user, product_id)

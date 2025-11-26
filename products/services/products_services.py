@@ -26,7 +26,7 @@ def delete_product_service(product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
-
+# add to wishlist service
 def add_to_wishlist_service(user, product_id):
     product = get_object_or_404(Product, id=product_id)
     wishlist, created = Wishlist.objects.get_or_create(user=user)
