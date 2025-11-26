@@ -1,5 +1,10 @@
+# rest_framework imports
+from rest_framework.response import Response
+from rest_framework.views import APIView
+# local imports
 from .models import Product
 from .serializers import product_serializer , product_list_serializer
+
 from .services.products_services import (
     product_detail_service,
     list_products_service,
@@ -7,16 +12,11 @@ from .services.products_services import (
     delete_product_service,
     add_to_wishlist_service,
 )
-from rest_framework import viewsets
-from sentence_transformers import SentenceTransformer, util
-import torch
-from rest_framework.views import APIView
-from rest_framework.response import Response
+# AI and search imports
+from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from .ai_assistant.call_ai import parse_user_query
 from .filters import filter_products
-
-import numpy as np
 
 model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 
