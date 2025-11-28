@@ -23,11 +23,11 @@ model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 
 
 class product_services_view(APIView) :
-    permission_classes = [IsAuthenticated]
+    
     def post(self, request) :
         return create_product_service(request.data)
     def get(self, request) :
-        return list_products_service
+        return list_products_service()
     def delete(self, request, product_id) :
         return delete_product_service(product_id)
     
