@@ -37,7 +37,7 @@ class product_detail_view(APIView) :
         return product_detail_service(product_id)
 
 class semantic_search(APIView) :
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get(self, request):
         query = request.query_params.get("q")
         if not query:
@@ -58,6 +58,7 @@ class semantic_search(APIView) :
                 results.append({
                     "id": product.id,
                     "name": product.product_name,
+                    "image":product.image,
                     "similarity": float(score),
                 })
       

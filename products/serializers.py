@@ -10,7 +10,7 @@ class product_serializer(serializers.ModelSerializer) :
 class product_list_serializer(serializers.ModelSerializer) :
     class Meta :
         model = Product
-        fields = ['id', 'product_name', 'price', 'image']
+        fields = ['id', 'product_name', 'price', 'image','description']
 
 class wishlist_serializer(serializers.ModelSerializer) :
     class Meta :

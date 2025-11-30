@@ -36,7 +36,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'products.middleware.RequestTimingMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'smart_marketplace.urls'
