@@ -34,7 +34,13 @@ class product_services_view(APIView) :
 class product_detail_view(APIView) :
     permission_classes = [IsAuthenticated]
     def get(self, request, product_id) :
-        return product_detail_service(product_id)
+        product = Product.objects.get(id=product_id)
+        if not product :
+            return Response(
+                {"error" : "product not found"} , status=404
+            )
+        serializer = product_serializer(product)    
+        return Response(serializer.data)
 
 class semantic_search(APIView) :
     # permission_classes = [IsAuthenticated]
@@ -67,7 +73,7 @@ class semantic_search(APIView) :
         return Response({"results": results})
 
 class AIShoppingAssistant(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def post(self, request):
         user_text = request.data.get("query")
 

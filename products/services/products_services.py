@@ -14,7 +14,7 @@ def list_products_service():
 def product_detail_service(product_id):
     product = get_object_or_404(Product, id=product_id)
     serializer = product_serializer(product)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response({"result": serializer.data}, status=status.HTTP_200_OK)
 # def create product service
 def create_product_service(product_data):
     serializer = product_serializer(data=product_data)
@@ -33,3 +33,20 @@ def add_to_wishlist_service(user, product_id):
     wishlist.products.add(product)
     serializer = wishlist_serializer(wishlist)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+def add_product_to_wishlist(request,product) :
+    product = get_object_or_404(Product, id=product)
+    try :
+        wishs = Wishlist.objects.filter(
+            product=product,
+            user = request.user
+        )
+        if wishs :
+            return Response("this product already in ur wishlist", status=status.HTTP_226_IM_USED)
+    except :
+
+        Wishlist.products.add(product)
+        return Response(
+            "Product added to ur wish list" , status=status.HTTP_201_CREATED
+        )
+        
