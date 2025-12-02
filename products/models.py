@@ -11,7 +11,7 @@ class Product(models.Model) :
     image        = models.ImageField(upload_to="products_images/")
     embedding    = ArrayField(base_field=models.FloatField(), size=1536, null=True, blank=True)
 
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE , related_name='lsisted_products')
 
     def __str__(self):
         return self.product_name

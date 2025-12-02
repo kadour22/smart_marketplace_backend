@@ -21,7 +21,6 @@ from .filters import filter_products
 
 model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 
-
 class product_services_view(APIView) :
     
     def post(self, request) :
@@ -32,7 +31,6 @@ class product_services_view(APIView) :
         return delete_product_service(product_id)
     
 class product_detail_view(APIView) :
-    permission_classes = [IsAuthenticated]
     def get(self, request, product_id) :
         product = Product.objects.get(id=product_id)
         if not product :
@@ -43,7 +41,7 @@ class product_detail_view(APIView) :
         return Response(serializer.data)
 
 class semantic_search(APIView) :
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         query = request.query_params.get("q")
         if not query:
@@ -73,7 +71,7 @@ class semantic_search(APIView) :
         return Response({"results": results})
 
 class AIShoppingAssistant(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         user_text = request.data.get("query")
 
