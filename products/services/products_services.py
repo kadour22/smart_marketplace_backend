@@ -36,4 +36,8 @@ def add_to_wishlist_service(user, product_id):
     wishlist.products.add(product)
     serializer = wishlist_serializer(wishlist)
     return Response(serializer.data, status=status.HTTP_200_OK)
-        
+
+def my_wishlist_service(user):
+    wishlist= Wishlist.objects.get(user=user)
+    serializer = wishlist_serializer(wishlist)
+    return Response(serializer.data, status=status.HTTP_200_OK)
