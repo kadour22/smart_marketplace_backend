@@ -13,6 +13,7 @@ from .services.products_services import (
     delete_product_service,
     add_to_wishlist_service,
     my_wishlist_service,
+    remove_from_wishlist_service,
 )
 # AI and search imports
 from sentence_transformers import SentenceTransformer
@@ -91,7 +92,7 @@ class AIShoppingAssistant(APIView):
             "results": serializer.data
         })
 
-class AddToWishlistView(APIView):
+class WishlistServiceView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, product_id):
         user = request.user
@@ -99,3 +100,9 @@ class AddToWishlistView(APIView):
     def get(self, request):
         user = request.user
         return my_wishlist_service(user)
+
+class DeleteProductFromWishlistView(APIView):
+    permission_classes = [IsAuthenticated]
+    def delete(self, request, product_id):
+        user = request.user
+        return remove_from_wishlist_service(user, product_id)

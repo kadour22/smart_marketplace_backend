@@ -41,3 +41,10 @@ def my_wishlist_service(user):
     wishlist= Wishlist.objects.get(user=user)
     serializer = wishlist_serializer(wishlist)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+def remove_from_wishlist_service(user, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist = get_object_or_404(Wishlist, user=user)
+    wishlist.products.remove(product)
+    serializer = wishlist_serializer(wishlist)
+    return Response(serializer.data, status=status.HTTP_200_OK)
