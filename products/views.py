@@ -12,6 +12,7 @@ from .services.products_services import (
     create_product_service,
     delete_product_service,
     add_to_wishlist_service,
+    my_wishlist_service,
 )
 # AI and search imports
 from sentence_transformers import SentenceTransformer
@@ -95,3 +96,6 @@ class AddToWishlistView(APIView):
     def post(self, request, product_id):
         user = request.user
         return add_to_wishlist_service(user, product_id)
+    def get(self, request):
+        user = request.user
+        return my_wishlist_service(user)
