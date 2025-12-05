@@ -10,5 +10,5 @@ urlpatterns = [
     path('search/' , views.semantic_search.as_view()),
     path('ai-assistant/' , views.AIShoppingAssistant.as_view()),
     # wishlist urls
-    path('wishlist/<int:product_id>/' , views.AddToWishlistView.as_view()),
+    path('wishlist/<int:product_id>/' , views.WishlistServiceView.as_view()),
 ]

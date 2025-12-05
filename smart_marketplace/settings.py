@@ -14,7 +14,6 @@ DEBUG = os.getenv("DEBUG")
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
