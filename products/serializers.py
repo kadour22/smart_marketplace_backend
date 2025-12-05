@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Product, Wishlist
 
 class product_serializer(serializers.ModelSerializer) :
-    seller = serializers.ReadOnlyField(source='seller.username')
+    
     class Meta :
         model = Product
         fields = "__all__"
