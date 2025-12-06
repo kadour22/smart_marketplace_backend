@@ -73,24 +73,29 @@ class semantic_search(APIView) :
         return Response({"results": results})
 
 class AIShoppingAssistant(APIView):
-    permission_classes = [IsAuthenticated]
+   
     def post(self, request):
         user_text = request.data.get("query")
 
         if not user_text:
             return Response({"error": "Query is required"}, status=400)
 
-        ai_filters = parse_user_query(user_text)
-        print("filters:", ai_filters)
-        
-        products = filter_products(ai_filters)
-        print(products)
-        
-        serializer = product_list_serializer(products, many=True)
-        return Response({
-            "filters": ai_filters,
-            "results": serializer.data
-        })
+        try:
+            ai_filters = parse_user_query(user_text)
+            print("filters:", ai_filters)
+            
+            products = filter_products(ai_filters)
+            print(products)
+            
+            serializer = product_list_serializer(products, many=True)
+            return Response({
+                "filters": ai_filters,
+                "results": serializer.data
+            })
+        except Exception as e:
+            return Response({
+                "error": f"AI processing failed: {str(e)}"
+            }, status=500)
 
 class WishlistServiceView(APIView):
     permission_classes = [IsAuthenticated]
