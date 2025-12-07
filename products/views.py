@@ -20,7 +20,7 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from .ai_assistant.call_ai import parse_user_query
 from .filters import filter_products
-
+from django.db.models import Q
 model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 
 class product_services_view(APIView) :
@@ -35,6 +35,7 @@ class product_services_view(APIView) :
 class product_detail_view(APIView) :
     def get(self, request, product_id) :
         product = Product.objects.get(id=product_id)
+
         if not product :
             return Response(
                 {"error" : "product not found"} , status=404
