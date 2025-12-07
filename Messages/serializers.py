@@ -16,3 +16,9 @@ class messageSerializer(serializers.ModelSerializer):
 
     def get_sender(self , obj) :
         return obj.sender.username
+
+class sendMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ["conversation", "sender", "content", "timestamp"]
+        read_only_fields = ["sender"]
