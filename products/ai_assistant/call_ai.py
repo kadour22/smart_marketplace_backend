@@ -5,7 +5,7 @@ from openai import OpenAI
 
 client = OpenAI(
   base_url="https://openrouter.ai/api/v1",
-  api_key="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",
+  api_key=os.getenv("OPENAI_API_KEY"),
 )
 
 
@@ -35,7 +35,7 @@ def parse_user_query(user_text: str):
         "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
     },
     extra_body={},
-    model="x-ai/grok-code-fast-1",
+    model="x-ai/grok-4.1-fast",
     messages=[{"role": "user", "content": prompt}],
 )
     raw_text = response.choices[0].message.content

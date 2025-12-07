@@ -3,5 +3,5 @@ from openai import OpenAI
 
 client = OpenAI(
   base_url="https://openrouter.ai/api/v1",
-  api_key="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",
+  api_key="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",
 )

@@ -26,3 +26,6 @@ class Wishlist(models.Model):
 class HistorySearch(models.Model) :
     search_input = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.search_input

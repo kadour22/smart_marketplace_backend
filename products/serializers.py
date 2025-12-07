@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Wishlist
+from .models import Product, Wishlist , HistorySearch
 
 class product_serializer(serializers.ModelSerializer) :
     
@@ -19,3 +19,8 @@ class wishlist_serializer(serializers.ModelSerializer) :
         model = Wishlist
         fields = ["user", "products"]
         read_only_fields = ['user']
+
+class historySearchSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = HistorySearch
+        fields= "__all__"

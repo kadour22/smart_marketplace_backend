@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 # local imports
 from .models import Product
-from .serializers import product_serializer , product_list_serializer
+from .serializers import product_serializer , product_list_serializer, historySearchSerializer
 
 from .services.products_services import (
     product_detail_service,
