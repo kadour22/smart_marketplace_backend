@@ -6,6 +6,7 @@ from .serializers import conversationSerializer, messageSerializer, sendMessageS
 from rest_framework.permissions import IsAuthenticated
 from django.db import transaction
 from django.db.models import Q
+
 class ConversationListCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
