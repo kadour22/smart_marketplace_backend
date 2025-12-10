@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'customers',
     'Messages',
     'rest_framework',
+    'Rate',
     'corsheaders',
 ]
 
