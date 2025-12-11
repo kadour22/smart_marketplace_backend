@@ -10,13 +10,13 @@ from .services.messages_service import (
 class ConversationListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        get_conversations_list(
+        return get_conversations_list(
             sender=request.user ,
             recipient=request.user
         )
         
     def post(self, request):
-        initiate_conversation(
+        return initiate_conversation(
             data=request.data,
             sender=request.user
         )
@@ -24,9 +24,9 @@ class ConversationListCreateView(APIView):
 class ConversationMessagesList(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, conversation_id):
-        conversation_messages_list(conversation_id=conversation_id)
+        return conversation_messages_list(conversation_id=conversation_id)
 
 class SendMessage(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        sending_message(data=request.data,sender=request.user)
+        return sending_message(data=request.data,sender=request.user)
