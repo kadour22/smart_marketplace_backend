@@ -10,7 +10,7 @@ class RequestTimingMiddleware:
         response = self.get_response(request)
 
         end = time.time()
-        duration = (end - start) * 1000  # convert to milliseconds
+        duration = (end - start) * 1000 
 
         print(f"[REQUEST TIME] {request.path} took {duration:.2f} ms")
 

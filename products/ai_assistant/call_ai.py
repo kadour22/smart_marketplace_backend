@@ -30,22 +30,17 @@ def parse_user_query(user_text: str):
 """
 
     response = client.chat.completions.create(
-    extra_headers={
-        "HTTP-Referer": "<YOUR_SITE_URL>", # Optional. Site URL for rankings on openrouter.ai.
-        "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
-    },
-    extra_body={},
     model="x-ai/grok-4.1-fast",
     messages=[{"role": "user", "content": prompt}],
 )
     raw_text = response.choices[0].message.content
 
-    # Extract JSON from the response
     try:
         json_str = re.search(r"\{.*\}", raw_text, re.DOTALL).group()
         data = json.loads(json_str)
-    # Handle cases where extraction or parsing fails
+
     except (AttributeError, json.JSONDecodeError):
+
         data = {
             "category": None,
             "min_price": None,
