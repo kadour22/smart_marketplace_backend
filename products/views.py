@@ -51,8 +51,6 @@ class semantic_search(APIView) :
             return Response({"error": "Missing query parameter ?q="}, status=400)
         
         query_embedding = model.encode([query])
-        
-        
         products = Product.objects.all()
         embedding = [p.embedding for p in products]
         similarities = cosine_similarity(query_embedding , embedding)[0]

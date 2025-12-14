@@ -8,7 +8,6 @@ client = OpenAI(
   api_key=os.getenv("OPENAI_API_KEY"),
 )
 
-
 def parse_user_query(user_text: str):
     prompt = f"""
         You are an AI that converts user shopping requests into structured filters.
