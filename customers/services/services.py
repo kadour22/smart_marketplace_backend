@@ -1,4 +1,4 @@
-from rest_framework.views import APIView
+
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -17,3 +17,12 @@ def customer_profile(user) :
     
     except CustomerProfile.DoesNotExist:
         return Response({"detail": "Profile not found."}, status=status.HTTP_404_NOT_FOUND)
+
+def customer_wishlist(user) :
+    try:
+        user = user
+        serializer = user_serializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+            print(e)
+            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
