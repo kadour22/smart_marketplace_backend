@@ -26,3 +26,15 @@ class user_serializer(serializers.ModelSerializer) :
     class Meta :
         model = User
         fields = ['id', 'username', 'wishlist']
+
+class create_customer_serializer(serializers.ModelSerializer) :
+    class Meta:
+        model = User
+        fields = [
+            "username","email","password"
+        ] 
+        
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User.objects.create_user(**validated_data, password=password)
+        return user
