@@ -21,6 +21,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from .ai_assistant.call_ai import parse_user_query
 from .filters import filter_products
 from django.db.models import Q
+from products.ai_assistant.compare_product import compare_products
 model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 
 class product_services_view(APIView) :
@@ -110,3 +111,9 @@ class DeleteProductFromWishlistView(APIView):
     def delete(self, request, product_id):
         user = request.user
         return remove_from_wishlist_service(user, product_id)
+    
+class compare_products_view(APIView) :
+    def get(self, request) :
+        prod1 = request.data.get("prod1")
+        prod2 = request.data.get("prod2")
+        return compare_products(prod1=prod1 , prod2=prod2)

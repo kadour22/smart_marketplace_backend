@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from products.models import Product, Wishlist
 from products.serializers import product_serializer, product_list_serializer , wishlist_serializer
 from rest_framework import status
+from products.ai_assistant.compare_product import compare_products
 
 # def products list service
 def list_products_service():
