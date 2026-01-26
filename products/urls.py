@@ -11,5 +11,5 @@ urlpatterns = [
     path('ai-assistant/' , views.AIShoppingAssistant.as_view()),
     # wishlist urls
     path('wishlist/<int:product_id>/' , views.WishlistServiceView.as_view()),
-    path('compare-product/' , views.compare_products_view.as_view())
+    path('compare-product/' , views.compare_products_view.as_view()),
 ]
