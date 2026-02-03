@@ -59,3 +59,4 @@ def compare_products(prod1:dict,prod2:dict) :
     )
     print(response.choices[0].message.content)
 
+
