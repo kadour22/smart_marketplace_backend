@@ -7,7 +7,7 @@ from products.ai_assistant.compare_product import compare_products
 
 # def products list service
 def list_products_service():
-    products = Product.objects.all()
+    products = Product.objects.prefetch_related("product_contacts").all()
     serializer = product_list_serializer(products, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
